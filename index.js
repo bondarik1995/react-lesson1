@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Hello from './Hello';
-import './style.css';
+
+import { Button } from './components/button';
+import { Icon, IconLoading } from './components/icons';
+
+let loadingTypes = {
+  spinner: "spinner",
+  loading: "circle-o-notch",
+  refresh: "refresh",
+}
 
 class App extends Component {
   constructor() {
@@ -33,54 +40,45 @@ class App extends Component {
   }
 }
 
-const loadingTypes = {
-  spinner: "spinner",
-  loading: "circle-o-notch",
-  refresh: "refresh"
-}
-
-const Button = ({text, kind, borderRadius = 0, icon, loadingType, onClick}) => (
-  <button className={"btn " + kind} style={{borderRadius: borderRadius}} onClick={onClick}>
-    {icon ? <i class={"fa fa-" + icon}></i> : ""}
-    {loadingTypes[loadingType] ? <i class={"fa fa-" + loadingTypes[loadingType] + " fa-spin"}></i> : ""}
-    {text}
-  </button>
-);
-
 const btns = (
   <div>
     <Button 
-      text="Success" 
       kind="success" 
-      borderRadius={5} 
-      icon="home" 
-      loadingType="spinner"
-    />
+      borderRadius={5}
+    >
+      <Icon name="home" />
+      // <IconLoading name={loadingTypes["spinner"]} />
+      Success
+    </Button>
     <Button 
-      text="Info" 
       kind="info"
-      loadingType="loading"
-    />
+    >
+      // <IconLoading name={loadingTypes["loading"]} />
+      Info
+    </Button>
     <Button 
-      text="Warning" 
       kind="warning" 
       borderRadius={50} 
       icon="trash"
       loadingType="refresh"
-    />
+    >
+      Warning
+    </Button>
     <Button 
-      text="Danger" 
       kind="danger" 
       borderRadius={10} 
       icon="close" 
-    />
+    >
+      Danger
+    </Button>
     <Button 
-      text="Default" 
       kind="default" 
       borderRadius={30} 
       icon="folder" 
-    />
+    >
+      Default
+    </Button>
   </div>
 );
 
-render(<App />, document.getElementById('root'));
+render(btns, document.getElementById('root'));
